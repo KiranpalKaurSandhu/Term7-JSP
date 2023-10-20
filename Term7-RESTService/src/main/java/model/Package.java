@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Table(name = "packages")
@@ -21,10 +22,10 @@ public class Package {
     private String pkgName;
 
     @Column(name = "PkgStartDate")
-    private Instant pkgStartDate;
+    private Date pkgStartDate;
 
     @Column(name = "PkgEndDate")
-    private Instant pkgEndDate;
+    private Date pkgEndDate;
 
     @Size(max = 50)
     @Column(name = "PkgDesc", length = 50)
@@ -57,19 +58,19 @@ public class Package {
         this.pkgName = pkgName;
     }
 
-    public Instant getPkgStartDate() {
+    public Date getPkgStartDate() {
         return pkgStartDate;
     }
 
-    public void setPkgStartDate(Instant pkgStartDate) {
+    public void setPkgStartDate(Date pkgStartDate) {
         this.pkgStartDate = pkgStartDate;
     }
 
-    public Instant getPkgEndDate() {
+    public Date getPkgEndDate() {
         return pkgEndDate;
     }
 
-    public void setPkgEndDate(Instant pkgEndDate) {
+    public void setPkgEndDate(Date pkgEndDate) {
         this.pkgEndDate = pkgEndDate;
     }
 

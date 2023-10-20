@@ -6,6 +6,9 @@
   <persistence-unit name="default">
     <class>model.Booking</class>
     <class>model.Bookingdetail</class>
+    <class>model.Customer</class>
+    <class>model.Triptype</class>
+    <class>model.Package</class>
 
     <properties>
       <property name="jakarta.persistence.jdbc.driver " value="org.mariadb.jdbc.Driver"/>
