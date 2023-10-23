@@ -2,16 +2,13 @@ package com.example.term7webpage;
 
 import java.io.*;
 import java.sql.*;
+import java.util.Properties;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-@WebServlet(name = "loginServlet", value = "/login-servlet",
-        initParams = {
-                @WebInitParam(name = "dbURL", value = "jdbc:mariadb://localhost:3306/travelexperts"),
-                @WebInitParam(name = "dbUser", value = "Kiranpal"),
-                @WebInitParam(name ="dbPassword", value = "password")
-        })
+@WebServlet(name = "loginServlet", value = "/login-servlet")
+
 public class LoginServlet extends HttpServlet {
 
 
@@ -19,22 +16,33 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html");
 
 
-        // Hello
+
         PrintWriter out = response.getWriter();
         // retrieve session variable, cannot access it directly
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if(username == null || password == null  || username.equals("") || password.equals(""))
+        if(username == null || password == null  || username.isEmpty() || password.isEmpty())
         {
             session.setAttribute("message", "username or password is empty");
             response.sendRedirect("index.jsp");
         }
         else {
-            // read from database
+
+            // Read database connection properties from the properties file
+            Properties properties = new Properties();
+            try (InputStream input = new FileInputStream("C:/Users/kiran/Documents/connection2.properties")) {
+                properties.load(input);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String dbURL = properties.getProperty("url");
+            String dbUser = properties.getProperty("user");
+            String dbPassword = properties.getProperty("password");
+
+            // Establish the database connection
             try {
-                Connection conn = DriverManager.getConnection(getInitParameter("dbURL"),
-                        getInitParameter("dbUser"), getInitParameter("dbPassword"));
+                Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
                 String sql = "select password from agents where username=?";
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setString(1, username);

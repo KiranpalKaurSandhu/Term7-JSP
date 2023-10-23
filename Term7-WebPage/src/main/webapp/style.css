@@ -5,7 +5,7 @@ body {
     padding: 0;
 }
 
-.container {
+.bookingcontainer {
     background-color: #fff;
     margin: 20px auto;
     padding: 20px;
@@ -68,4 +68,21 @@ ul li {
     padding: 10px;
     margin-bottom: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+ .footer {
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     background-color: #f8f9fa;
+     padding: 10px 0;
+     text-align: center;
+ }
+.error-message {
+    display: none;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
 }
