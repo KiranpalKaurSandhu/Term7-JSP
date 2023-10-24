@@ -1,5 +1,6 @@
 package com.example.term7restservice;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import jakarta.persistence.EntityManager;
@@ -34,4 +35,17 @@ public class PackageResource {
         }
         return jsonArray.toString();
     }
-}
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getallpackages")
+    public String getAllPackages()
+    {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager = factory.createEntityManager();
+        Query query = entityManager.createQuery("select p from Package p");
+        List<Package> list = query.getResultList();
+
+        Gson gson = new Gson();
+
+        return gson.toJson(list);
+    }}

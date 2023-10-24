@@ -13,7 +13,7 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="header.jsp" />
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-6 offset-lg-3">

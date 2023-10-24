@@ -50,6 +50,7 @@ public class BookingResource {
         entityManager.getTransaction().begin();
         Booking updatedBooking = entityManager.merge(booking);
         String message = null;
+
         if (updatedBooking != null)
         {
             entityManager.getTransaction().commit();
@@ -66,37 +67,38 @@ public class BookingResource {
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes({ MediaType.APPLICATION_JSON })
     @Path("putbooking")
-    public String putbooking(String jsonString) {
+    public String putBooking(String jsonString) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = factory.createEntityManager();
-        Query query = entityManager.createQuery("select  b from Booking b");
+        Query query = entityManager.createQuery("select b from Booking b");
         List<Booking> list = query.getResultList();
         int listSize = list.size();
         Gson gson = new Gson();
-        Booking booking = gson.fromJson(jsonString, Booking.class);
+        Booking booking  = gson.fromJson(jsonString, Booking.class);
         entityManager.getTransaction().begin();
         entityManager.persist(booking);
         String message = null;
 
-        //lookup query size after persist to see if size is increased by 1
-        query = entityManager.createQuery("select  b from Booking b");
+        //lookup query size after persist to see if size increased by 1
+        query = entityManager.createQuery("select b from Booking b");
         List<Booking> newList = query.getResultList();
         int newListSize = newList.size();
 
         if (newListSize > listSize)
         {
             entityManager.getTransaction().commit();
-            message = "{\"message\": \"Booking inserted successfully\" }";
+            message = "{ \"message\": \"Booking inserted successfully\" }";
         }
-        else {
+        else
+        {
             entityManager.getTransaction().rollback();
-            message = "{\"message\": \"Booking insert failed\" }";
+            message = "{ \"message\": \"Booking insert failed\" }";
         }
+
         entityManager.close();
         return message;
-
     }
 
     @DELETE

@@ -1,16 +1,16 @@
 package com.example.term7restservice;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
+import jakarta.persistence.*;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import model.Customer;
+import model.Package;
+import model.Triptype;
 
 import java.util.List;
 
@@ -19,7 +19,8 @@ public class CustomerResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getallselectcustomers")
-    public String getAllSelectCustomers() {
+    public String getAllSelectCustomers()
+    {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = factory.createEntityManager();
         Query query = entityManager.createQuery("select c from Customer c");
@@ -33,5 +34,20 @@ public class CustomerResource {
             jsonArray.add(jsonObject);
         }
         return jsonArray.toString();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getallcustomers")
+    public String getAllCustomers()
+    {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager = factory.createEntityManager();
+        Query query = entityManager.createQuery("select c from Customer c");
+        List<Customer> list = query.getResultList();
+
+        Gson gson = new Gson();
+
+        return gson.toJson(list);
     }
 }

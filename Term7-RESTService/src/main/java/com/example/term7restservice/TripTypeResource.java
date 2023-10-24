@@ -1,5 +1,6 @@
 package com.example.term7restservice;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import jakarta.persistence.EntityManager;
@@ -10,6 +11,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import model.Customer;
 import model.Triptype;
 
 import java.util.List;
@@ -31,5 +33,19 @@ public class TripTypeResource {
             jsonArray.add(jsonObject);
         }
         return jsonArray.toString();
+    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getalltriptypes")
+    public String getAllTripType()
+    {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager = factory.createEntityManager();
+        Query query = entityManager.createQuery("select t from Triptype t");
+        List<Triptype> list = query.getResultList();
+
+        Gson gson = new Gson();
+
+        return gson.toJson(list);
     }
 }

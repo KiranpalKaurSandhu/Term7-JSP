@@ -38,9 +38,9 @@ public class Package {
     @Column(name = "PkgAgencyCommission", precision = 19, scale = 4)
     private BigDecimal pkgAgencyCommission;
 
-    @NotNull
+    /*@NotNull
     @Column(name = "pkgImages", nullable = false)
-    private Integer pkgImages;
+    private Integer pkgImages;*/
 
     public Integer getPackageId() {
         return packageId;
@@ -98,12 +98,12 @@ public class Package {
         this.pkgAgencyCommission = pkgAgencyCommission;
     }
 
-    public Integer getPkgImages() {
+    /*public Integer getPkgImages() {
         return pkgImages;
     }
 
     public void setPkgImages(Integer pkgImages) {
         this.pkgImages = pkgImages;
-    }
+    }*/
 
 }
