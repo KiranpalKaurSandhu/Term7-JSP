@@ -1,11 +1,8 @@
 package model;
 
-import com.example.term7restservice.InstantConverter;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import java.util.Date;
-import java.time.Instant;
 
 @Entity
 @Table(name = "bookings")
@@ -30,7 +27,7 @@ public class Booking {
     private Integer customerId;
 
     @Column(name = "TripTypeId")
-    private String tripId;
+    private String tripTypeId;
 
     @Column(name = "PackageId")
     private Integer packageId;
@@ -75,12 +72,12 @@ public class Booking {
         this.customerId = customerId;
     }
 
-    public String getTripId() {
-        return tripId;
+    public String getTripTypeId() {
+        return tripTypeId;
     }
 
-    public void setTripId(String tripId) {
-        this.tripId = tripId;
+    public void setTripTypeId(String tripTypeId) {
+        this.tripTypeId = tripTypeId;
     }
 
     public Integer getPackageId() {
