@@ -60,6 +60,7 @@ public class AgentResource {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = factory.createEntityManager();
         Agent agent = entityManager.find(Agent.class, username);
+        System.out.println(agent.getAgentId() + agent.getUsername() + agent.getPassword());
 
         if (agent != null && agent.getPassword().equals(password)) {
             return true;

@@ -166,7 +166,7 @@
         {
             var jsonString = buildInsertJSON();
             $.ajax({
-                url: "http://localhost:8080/Term7-WebPage-1.0-SNAPSHOT/api/booking/putbooking",
+                url: "http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/booking/putbooking",
                 method: "PUT",
                 config: { headers:{
                         "Access-Control-Allow-Headers": "Origin, Content-Type, Accept, Authorization",
@@ -184,9 +184,9 @@
                 alert(result);
             }).fail(function (xhr, text, error){
                 //$("#message").html(text + " | " + error);
-                alert(text + " | " + error);
+                alert("create didnt go through");
             });
-            loadBooking();
+            //loadBooking();
         }
 
         // ajax function for delete
@@ -207,12 +207,12 @@
                 dataType: "json",
                 contentType: "application/json"
             }).done(function (data, text, xhr){
-                var result = JSON.parse(xhr.responseText);
+                //var result = JSON.parse(xhr.responseText);
                 //$("#message").html(result.message);
-                alert(result);
+                alert("Booking Deleted Successfully");
             }).fail(function (xhr, text, error){
                 //$("#message").html(text + " | " + error);
-                alert(text + " | " + error);
+                //alert(text + " | " + error);
             });
         }
 
@@ -228,9 +228,9 @@
                 dataType: "json",
                 contentType: "application/json"
             }).done(function (data, text, xhr){
-                var result = JSON.parse(xhr.responseText);
+                //var result = JSON.parse(xhr.responseText);
                 //$("#message").html(result.message);
-                alert(result);
+                alert("Booking Updated Successfully");
             }).fail(function (xhr, text, error){
                 //$("#message").html(text + " | " + error);
                 alert(text + " | " + error);
