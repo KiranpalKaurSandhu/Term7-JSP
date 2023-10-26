@@ -162,22 +162,20 @@
         }
 
         // ajax function to insert to database
-        function putBooking() {
-            var jsonData = buildInsertJSON();
+        function putBooking()
+        {
+            var jsonString = buildInsertJSON();
             $.ajax({
                 url: "http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/booking/putbooking",
                 method: "PUT",
-                data: JSON.stringify(jsonData),
+                data: jsonString,
+                accept: "application/json",
                 dataType: "json",
-                contentType: "application/json",
-            }).done(function (data, text, xhr) {
-                var result = data.message;
+                contentType: "application/json"
+            }).done(function (data, text, xhr){
+                var result = JSON.parse(xhr.responseText);
+                //$("#message").html(result.message);
                 alert(result);
-
-                loadBooking();
-            }).fail(function (xhr, text, error) {
-                alert("Error: " + text + " | " + error);
-            });
             }).fail(function (xhr, text, error){
                 //$("#message").html(text + " | " + error);
                 alert("create didnt go through");
@@ -237,8 +235,6 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <% String agentName = (String) session.getAttribute("agent_name"); %>
-        Welcome <%= agentName %>!
         <a class="navbar-brand" href="logout.jsp">Logout</a>
     </div>
 </nav>
