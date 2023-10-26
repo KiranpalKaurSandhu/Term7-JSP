@@ -230,11 +230,12 @@
                 alert(text + " | " + error);
             });
         }
+
     </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
+    <div class="container" id="navBar">
         <% String agentName = (String) session.getAttribute("agent_name"); %>
         Welcome <%= agentName %>!
         <a class="navbar-brand" href="logout.jsp">Logout</a>
