@@ -162,31 +162,21 @@
         }
 
         // ajax function to insert to database
-        function putBooking()
-        {
-            var jsonString = buildInsertJSON();
+        function putBooking() {
+            var jsonData = buildInsertJSON();
             $.ajax({
                 url: "http://localhost:8080/Term7-WebPage-1.0-SNAPSHOT/api/booking/putbooking",
                 method: "PUT",
-                config: { headers:{
-                        "Access-Control-Allow-Headers": "Origin, Content-Type, Accept, Authorization",
-                        "Access-Control-Allow-Origin": "*"
-                    }
-                },
-                crossDomain:true,
-                data: jsonString,
-                accept: "application/json",
+                data: JSON.stringify(jsonData),
                 dataType: "json",
-                contentType: "application/json"
-            }).done(function (data, text, xhr){
-                var result = JSON.parse(xhr.responseText);
-                //$("#message").html(result.message);
+                contentType: "application/json",
+            }).done(function (data, text, xhr) {
+                var result = data.message;
                 alert(result);
-            }).fail(function (xhr, text, error){
-                //$("#message").html(text + " | " + error);
-                alert(text + " | " + error);
+                loadBooking();
+            }).fail(function (xhr, text, error) {
+                alert("Error: " + text + " | " + error);
             });
-            loadBooking();
         }
 
         // ajax function for delete
@@ -241,6 +231,8 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
+        <% String agentName = (String) session.getAttribute("agent_name"); %>
+        Welcome <%= agentName %>!
         <a class="navbar-brand" href="logout.jsp">Logout</a>
     </div>
 </nav>

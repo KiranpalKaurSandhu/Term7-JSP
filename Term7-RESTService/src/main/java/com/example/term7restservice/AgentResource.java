@@ -37,34 +37,40 @@ public class AgentResource {
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String login(String jsonString) {
-        // Parse the JSON input (jsonString) to extract the username and password.
+    public Response login(String jsonString) {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager = factory.createEntityManager();
         Gson gson = new Gson();
         Agent agent = gson.fromJson(jsonString, Agent.class);
 
-        // Verify the username and password against your database or a source of user credentials.
         if (authenticate(agent.getUsername(), agent.getPassword())) {
-            // If authentication is successful, return a success response.
-            return Response.ok("{ \"success\": true, \"message\": \"Login successful\" }").build().toString();
+            return Response.status(Response.Status.OK)
+                    .entity("{ \"success\": true, \"message\": \"Login successful\" }")
+                    .build();
         } else {
-            // Return an error response for failed login attempts.
             return Response.status(Response.Status.UNAUTHORIZED)
                     .entity("{ \"success\": false, \"message\": \"Login failed\" }")
-                    .build().toString();
+                    .build();
         }
     }
 
-    // Implement your authentication logic, e.g., querying the database for user credentials.
     private boolean authenticate(String username, String password) {
-        // Replace this with your authentication logic, e.g., checking the database for the user.
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = factory.createEntityManager();
-        Agent agent = entityManager.find(Agent.class, username);
 
-        if (agent != null && agent.getPassword().equals(password)) {
-            return true;
+        // Use a query to find an Agent by username
+        Query query = entityManager.createQuery("SELECT a FROM Agent a WHERE a.username = :username", Agent.class);
+        query.setParameter("username", username);
+
+        // Get the result
+        List<Agent> agents = query.getResultList();
+
+        if (agents.size() == 1) {
+            Agent agent = agents.get(0);
+            return agent.getPassword().equals(password);
         }
 
         return false;
     }
 }
+
