@@ -57,6 +57,11 @@ public class AgentResource {
     private boolean authenticate(String username, String password) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = factory.createEntityManager();
+<<<<<<< HEAD
+=======
+        Agent agent = entityManager.find(Agent.class, username);
+        System.out.println(agent.getAgentId() + agent.getUsername() + agent.getPassword());
+>>>>>>> 1af76b050ca01ef327d7d1885e579c695ea56723
 
         // Use a query to find an Agent by username
         Query query = entityManager.createQuery("SELECT a FROM Agent a WHERE a.username = :username", Agent.class);

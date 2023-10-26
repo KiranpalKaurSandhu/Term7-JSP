@@ -165,7 +165,7 @@
         function putBooking() {
             var jsonData = buildInsertJSON();
             $.ajax({
-                url: "http://localhost:8080/Term7-WebPage-1.0-SNAPSHOT/api/booking/putbooking",
+                url: "http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/booking/putbooking",
                 method: "PUT",
                 data: JSON.stringify(jsonData),
                 dataType: "json",
@@ -173,10 +173,18 @@
             }).done(function (data, text, xhr) {
                 var result = data.message;
                 alert(result);
+<<<<<<< HEAD
                 loadBooking();
             }).fail(function (xhr, text, error) {
                 alert("Error: " + text + " | " + error);
             });
+=======
+            }).fail(function (xhr, text, error){
+                //$("#message").html(text + " | " + error);
+                alert("create didnt go through");
+            });
+            //loadBooking();
+>>>>>>> 1af76b050ca01ef327d7d1885e579c695ea56723
         }
 
         // ajax function for delete
@@ -197,12 +205,12 @@
                 dataType: "json",
                 contentType: "application/json"
             }).done(function (data, text, xhr){
-                var result = JSON.parse(xhr.responseText);
+                //var result = JSON.parse(xhr.responseText);
                 //$("#message").html(result.message);
-                alert(result);
+                alert("Booking Deleted Successfully");
             }).fail(function (xhr, text, error){
                 //$("#message").html(text + " | " + error);
-                alert(text + " | " + error);
+                //alert(text + " | " + error);
             });
         }
 
@@ -218,9 +226,9 @@
                 dataType: "json",
                 contentType: "application/json"
             }).done(function (data, text, xhr){
-                var result = JSON.parse(xhr.responseText);
+                //var result = JSON.parse(xhr.responseText);
                 //$("#message").html(result.message);
-                alert(result);
+                alert("Booking Updated Successfully");
             }).fail(function (xhr, text, error){
                 //$("#message").html(text + " | " + error);
                 alert(text + " | " + error);

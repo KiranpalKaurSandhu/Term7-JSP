@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             // Read database connection properties from the properties file
             Properties properties = new Properties();
-            try (InputStream input = new FileInputStream("C:\\Users\\Kiran\\Documents\\connection2.properties")) {
+            try (InputStream input = new FileInputStream("C:\\Users\\Jade-Laptop\\Documents\\connection2.properties")) {
                 properties.load(input);
             } catch (IOException e) {
                 throw new RuntimeException(e);
