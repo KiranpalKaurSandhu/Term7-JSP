@@ -235,6 +235,8 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
+        <% String agentName = (String) session.getAttribute("agent_name"); %>
+        Welcome <%= agentName %>!
         <a class="navbar-brand" href="logout.jsp">Logout</a>
     </div>
 </nav>

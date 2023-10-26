@@ -23,22 +23,18 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html");
 
 
-
         PrintWriter out = response.getWriter();
         // retrieve session variable, cannot access it directly
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if(username == null || password == null  || username.isEmpty() || password.isEmpty())
-        {
+        if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
             session.setAttribute("message", "username or password is empty");
             response.sendRedirect("index.jsp");
-        }
-        else {
-
+        } else {
             // Read database connection properties from the properties file
             Properties properties = new Properties();
-            try (InputStream input = new FileInputStream("C:\\Users\\Jade-Laptop\\Documents\\connection2.properties")) {
+            try (InputStream input = new FileInputStream("C:\\Users\\Kiran\\Documents\\connection2.properties")) {
                 properties.load(input);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -50,23 +46,29 @@ public class LoginServlet extends HttpServlet {
             // Establish the database connection
             try {
                 Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
-                String sql = "select password from agents where username=?";
+                String sql = "select agtFirstName, agtLastName, password from agents where username=?";
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setString(1, username);
                 ResultSet rs = stmt.executeQuery();
                 if (rs.next()) {
-                    if (password.equals(rs.getString(1))) {
+                    String dbPasswordFromDatabase = rs.getString("password");
+                    if (password.equals(dbPasswordFromDatabase)) {
                         session.setAttribute("logged_in", true);
+                        // Retrieve agent's first name and last name
+                        String firstName = rs.getString("agtFirstName");
+                        String lastName = rs.getString("agtLastName");
+
+                        // Combine first name and last name and store as "agent_name"
+                        String agentName = firstName + " " + lastName;
+                        session.setAttribute("agent_name", agentName);
                         conn.close();
                         response.sendRedirect("booking.jsp");
-                    }
-                    else {
+                    } else {
                         session.setAttribute("message", "Invalid username or password");
                         conn.close();
                         response.sendRedirect("index.jsp");
                     }
-                }
-                else {
+                } else {
                     session.setAttribute("message", "Invalid username or password");
                     conn.close();
                     response.sendRedirect("index.jsp");
