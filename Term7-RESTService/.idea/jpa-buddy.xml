@@ -4,6 +4,6 @@
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
     <option name="reverseEngineeringLastDbConnectionId" value="9a9fe345-26c3-4094-bca8-48f9852c3895__travelexperts" />
-    <option name="reLastEntityCreationPackage" value="src/main/java/com/example/term7restservice" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/model" />
   </component>
 </project>

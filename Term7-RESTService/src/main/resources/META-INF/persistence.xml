@@ -9,12 +9,13 @@
     <class>model.Customer</class>
     <class>model.Triptype</class>
     <class>model.Package</class>
+    <class>model.Agent</class>
 
     <properties>
       <property name="jakarta.persistence.jdbc.driver " value="org.mariadb.jdbc.Driver"/>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/travelexperts"/>
-      <property name="jakarta.persistence.jdbc.user" value="jade"/>
-      <property name="jakarta.persistence.jdbc.password" value="louise09"/>
+      <property name="jakarta.persistence.jdbc.user" value="Kiranpal"/>
+      <property name="jakarta.persistence.jdbc.password" value="password"/>
       <property name="eclipselink.target-database" value="mysql"/>
     </properties>
   </persistence-unit>

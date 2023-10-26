@@ -21,7 +21,7 @@ public class Booking {
     private String bookingNo;
 
     @Column(name = "TravelerCount")
-    private Double travelerCount;
+    private Integer travelerCount;
 
     @Column(name = "CustomerId")
     private Integer customerId;
@@ -56,11 +56,11 @@ public class Booking {
         this.bookingNo = bookingNo;
     }
 
-    public Double getTravelerCount() {
+    public Integer getTravelerCount() {
         return travelerCount;
     }
 
-    public void setTravelerCount(Double travelerCount) {
+    public void setTravelerCount(Integer travelerCount) {
         this.travelerCount = travelerCount;
     }
 

@@ -89,24 +89,49 @@
     </script>
     <script>
 
-        // populate booking list
-        function loadBooking()
-        {
-            $.get("http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/booking/getallbookings",
-                function (data){
-                    var ul = $("#bookingList");
-                    data.forEach(function (booking){
-                        if(booking.packageId != null)
-                            var li = $("<li class='list-group-item d-flex justify-content-between align-items-center'>").text("Booking: " + booking.bookingId + " " + booking.bookingDate + " " + booking.bookingNo + " " + booking.travelerCount + " " + booking.customerId + " " + booking.tripTypeId + " " + booking.packageId);
-                        else
-                            var li = $("<li class='list-group-item d-flex justify-content-between align-items-center'>").text("Booking: " + booking.bookingId + " " + booking.bookingDate + " " + booking.bookingNo + " " + booking.travelerCount + " " + booking.customerId + " " + booking.tripTypeId);
 
-                        ul.append(li);
+        function loadBooking() {
+            $.get("http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/booking/getallbookings",
+                function (data) {
+                    var table = $("#bookingTable");
+                    table.empty(); // Clear the table before populating it
+
+                    data.forEach(function (booking, index) {
+                        var row = $("<tr>");
+
+                        // Apply different background colors for odd and even rows
+                        if (index % 2 === 0) {
+                            row.addClass('even-row');
+                        } else {
+                            row.addClass('odd-row');
+                        }
+
+                        // Add booking information to each table cell
+                        if (booking.packageId != null) {
+                            row.append($("<td>").text(booking.bookingId));
+                            row.append($("<td>").text(booking.bookingDate));
+                            row.append($("<td>").text(booking.bookingNo));
+                            row.append($("<td>").text(booking.travelerCount));
+                            row.append($("<td>").text(booking.customerId));
+                            row.append($("<td>").text(booking.tripTypeId));
+                            row.append($("<td>").text(booking.packageId));
+                        } else {
+                            row.append($("<td>").text(booking.bookingId));
+                            row.append($("<td>").text(booking.bookingDate));
+                            row.append($("<td>").text(booking.bookingNo));
+                            row.append($("<td>").text(booking.travelerCount));
+                            row.append($("<td>").text(booking.customerId));
+                            row.append($("<td>").text(booking.tripTypeId));
+                            row.append($("<td>").text("N/A"));
+                        }
+
+                        table.append(row);
                     });
                 });
         }
 
-        // get all values in insert form field and prepare as JSON for insert
+
+            // get all values in insert form field and prepare as JSON for insert
         function buildInsertJSON()
         {
             var data = "{" +
