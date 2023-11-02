@@ -6,6 +6,13 @@ import model.Booking;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+/*
+    Author : Kiranpal Kaur
+    Description : This class represents booking details, including itinerary information for a trip.
+    It is mapped to a database table named "bookingdetails" and defines properties like the itinerary number,
+     trip start and end dates, description, destination, pricing, and references to the associated booking
+     and product supplier.
+ */
 @Entity
 @Table(name = "bookingdetails")
 public class Bookingdetail {

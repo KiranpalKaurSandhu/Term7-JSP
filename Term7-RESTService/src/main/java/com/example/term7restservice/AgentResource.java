@@ -13,9 +13,18 @@ import model.Agent;
 
 import java.util.List;
 
+/*
+    Author : Kiranpal Kaur
+    Description: This class is a RESTful resource for managing agents. It provides endpoints for retrieving agent
+    information and handling agent login.
+ */
 @Path("/agent")
 public class AgentResource {
 
+    /**
+     * Retrieves all agents from the database and returns them as JSON.
+     * @return A JSON representation of all agents.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getallagents")
@@ -33,6 +42,11 @@ public class AgentResource {
         return gson.toJson(list);
     }
 
+    /**
+     * Authenticates an agent by checking the provided username and password.
+     * @param jsonString JSON data containing agent login credentials.
+     * @return A response indicating the success or failure of the login attempt.
+     */
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,6 +68,12 @@ public class AgentResource {
         }
     }
 
+    /**
+     * Authenticates an agent by verifying the provided username and password.
+     * @param username The agent's username.
+     * @param password The agent's password.
+     * @return True if the authentication is successful, false otherwise.
+     */
     private boolean authenticate(String username, String password) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
         EntityManager entityManager = factory.createEntityManager();

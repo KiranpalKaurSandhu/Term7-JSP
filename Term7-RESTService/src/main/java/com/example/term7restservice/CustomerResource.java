@@ -14,8 +14,18 @@ import model.Triptype;
 
 import java.util.List;
 
+/*
+    Author : Kiranpal Kaur
+    Description : This class is a RESTful resource for managing customers. It provides endpoints for retrieving
+    customer information.
+ */
 @Path("/customer")
 public class CustomerResource {
+
+    /**
+     * Retrieves selected customer information from the database and returns it as JSON.
+     * @return A JSON representation of selected customer information.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getallselectcustomers")
@@ -36,6 +46,13 @@ public class CustomerResource {
         return jsonArray.toString();
     }
 
+    /*
+    Author : Jade Bayot
+    */
+    /**
+     * Retrieves selected customer information from the database and returns it as JSON.
+     * @return A JSON representation of selected customer information.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getallcustomers")

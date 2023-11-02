@@ -15,8 +15,18 @@ import model.Package;
 
 import java.util.List;
 
+/*
+    Author : Kiranpal Kaur
+     Description: This class is a RESTful resource for managing packages. It provides endpoints for retrieving
+     package information.
+ */
 @Path("/package")
 public class PackageResource {
+
+    /**
+     * Retrieves selected package information from the database and returns it as JSON.
+     * @return A JSON representation of selected package information.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getallselectpackages")
@@ -35,6 +45,14 @@ public class PackageResource {
         }
         return jsonArray.toString();
     }
+
+    /*
+    Author : Jade Bayot
+    */
+    /**
+     * Retrieves selected package information from the database and returns it as JSON.
+     * @return A JSON representation of selected package information.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getallpackages")

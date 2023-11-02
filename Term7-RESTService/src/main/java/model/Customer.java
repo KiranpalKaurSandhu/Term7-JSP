@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+/*
+    Author : Kiranpal Kaur
+    Description : This class represents a customer entity that is mapped to a database table named "customers."
+     It defines the structure of customer records, including customer contact information, such as name, address, phone numbers, and email.
+ */
 @Entity
 @Table(name = "customers")
 public class Customer {
