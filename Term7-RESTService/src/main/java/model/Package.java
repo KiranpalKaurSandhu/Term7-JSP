@@ -8,6 +8,11 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Date;
 
+/*
+    Author : Kiranpal Kaur
+    Description :  This class represents a package entity that is mapped to a database table named "packages."
+     It defines the structure of package records, including package details and pricing information.
+ */
 @Entity
 @Table(name = "packages")
 public class Package {

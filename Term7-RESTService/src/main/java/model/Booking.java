@@ -4,6 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import java.util.Date;
 
+/*
+    Author : Kiranpal Kaur
+    Description : This class represents a booking made by a traveler. It is mapped to a database table named
+    "bookings" and defines properties like booking date, booking number, traveler count, customer ID,
+    trip type ID, and package ID. The class facilitates the storage of booking-related information in a
+    structured manner.
+ */
 @Entity
 @Table(name = "bookings")
 public class Booking {

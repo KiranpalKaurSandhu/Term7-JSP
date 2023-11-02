@@ -11,8 +11,19 @@ import model.Customer;
 
 import java.util.List;
 
+/*
+    Author : Kiranpal Kaur
+    Description : This class is a RESTful resource for managing bookings. It provides various endpoints for retrieving,
+    creating, updating, and deleting bookings. The endpoints use the JPA EntityManager for database interactions
+    and Gson for JSON serialization.
+ */
 @Path("/booking")
 public class BookingResource {
+
+    /**
+     * Retrieves all bookings from the database and returns them as JSON.
+     * @return A JSON representation of all bookings.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getallbookings")
@@ -25,6 +36,12 @@ public class BookingResource {
 
         return gson.toJson(list);
     }
+
+    /**
+     * Retrieves a specific booking by its ID and returns it as JSON.
+     * @param bookingId The ID of the booking to retrieve.
+     * @return A JSON representation of the specified booking.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getbooking/{ bookingid }")
@@ -36,8 +53,12 @@ public class BookingResource {
 
         return gson.toJson(booking);
 
-
     }
+    /**
+     * Creates or updates a booking based on the provided JSON data.
+     * @param jsonString JSON data representing a booking.
+     * @return A message indicating the success or failure of the operation.
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -65,6 +86,11 @@ public class BookingResource {
 
     }
 
+    /**
+     * Inserts a new booking based on the provided JSON data.
+     * @param jsonString JSON data representing a new booking.
+     * @return A message indicating the success or failure of the operation.
+     */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -101,6 +127,11 @@ public class BookingResource {
         return message;
     }
 
+    /**
+     * Deletes a booking with the specified ID.
+     * @param bookingId The ID of the booking to delete.
+     * @return A message indicating the success or failure of the deletion.
+     */
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Path("deletebooking/{ bookingid }")

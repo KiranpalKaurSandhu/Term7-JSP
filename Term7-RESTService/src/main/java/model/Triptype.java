@@ -6,6 +6,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
+/*
+    Author : Kiranpal Kaur
+    Description : This class represents a trip type entity that is mapped to a database table named "triptypes."
+     It defines the structure of trip type records.
+ */
 @Entity
 @Table(name = "triptypes")
 public class Triptype {

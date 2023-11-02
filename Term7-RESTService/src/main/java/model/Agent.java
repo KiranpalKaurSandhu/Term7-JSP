@@ -3,6 +3,13 @@ package model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+/*
+    Author : Kiranpal Kaur
+    Description :  This class represents an agent who works for a travel agency. It is mapped to a database
+    table named "agents" and defines properties such as agent's first name, middle initial, last name, business
+    phone, email, position, and references to the agency. Additionally, it includes login credentials
+     (username and password) for agent authentication.
+ */
 @Entity
 @Table(name = "agents")
 public class Agent {
