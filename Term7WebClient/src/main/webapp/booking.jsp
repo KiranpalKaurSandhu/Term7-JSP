@@ -1,3 +1,4 @@
+<%--Author: Jade Bayot--%>
 <jsp:include page="header.jsp" />
 <div class="container mt-4">
   <h1 class="text-center mb-4">Booking Management</h1>
@@ -10,15 +11,15 @@
           <form id="createBookingForm">
             <div class="form-group">
               <label for="bookingDate">Booking Date:</label>
-              <input type="text" class="form-control" name="bookingDate" id="bookingDate">
+              <input type="text" class="form-control" name="bookingDate" id="bookingDate" required placeholder="YYYY-MM-DD" >
             </div>
             <div class="form-group">
               <label for="bookingNo">Booking No:</label>
-              <input type="text" class="form-control" name="bookingNo" id="bookingNo">
+              <input type="text" class="form-control" name="bookingNo" id="bookingNo" required maxlength="15" >
             </div>
             <div class="form-group">
               <label for="bookingNo">Traveler Count:</label>
-              <input type="text" class="form-control" name="travelerCount" id="travelerCount">
+              <input type="text" class="form-control" name="travelerCount" required id="travelerCount" >
             </div>
             <div class="form-group">
               <label for="bookingNo">Customer Id:</label>

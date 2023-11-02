@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
             // Establish the database connection
             try {
                 Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
-                String sql = "select agtFirstName, agtLastName, password from agents where username=?";
+                String sql = "select agentId, agtFirstName, agtLastName, password from agents where username=?";
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setString(1, username);
                 ResultSet rs = stmt.executeQuery();
@@ -57,9 +57,11 @@ public class LoginServlet extends HttpServlet {
                         // Retrieve agent's first name and last name
                         String firstName = rs.getString("agtFirstName");
                         String lastName = rs.getString("agtLastName");
+                        int loggedInAgent = Integer.parseInt(rs.getString("agentId"));
 
                         // Combine first name and last name and store as "agent_name"
                         String agentName = firstName + " " + lastName;
+                        session.setAttribute("agentId", loggedInAgent);
                         session.setAttribute("agent_name", agentName);
                         conn.close();
                         response.sendRedirect("booking.jsp");

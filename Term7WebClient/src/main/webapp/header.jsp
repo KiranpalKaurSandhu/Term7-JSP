@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kiran
-  Date: 2023-10-22
-  Time: 8:35 p.m.
-  To change this template use File | Settings | File Templates.
---%>
+<%--Author: Jade Bayot--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,14 +7,20 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link href="style.css" rel="stylesheet">
     <script src="jquery.js"></script>
+    <%Object agent = session.getAttribute("agentId");%>
     <script>
+        var loggedInAgent = "<%=agent%>";
         // populate select fields onload
         $(document).ready(function ()
         {
             loadBooking();
 
+
+            alert(loggedInAgent);
+
+
             // set items for customer ID select
-            $.get("http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/customer/getallcustomers", function (data)
+            $.get("http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/customer/getcustomerbyagent/" + loggedInAgent,function (data)
             {
                 data.forEach(function (customer)
                 {
@@ -46,7 +46,7 @@
 
 
             // set items for booking ID in update and delete select
-            $.get("http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/booking/getallbookings",function (data) {
+            $.get("http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/booking/getbookingbyagent/" + loggedInAgent ,function(data) {
                 data.forEach(function (booking) {
                     $("#deleteBookingId").append(new Option(booking.bookingId ,booking.bookingId));
                     $("#updateBookingId").append(new Option(booking.bookingId ,booking.bookingId));
@@ -86,12 +86,9 @@
             });
         });
 
-    </script>
-    <script>
-
 
         function loadBooking() {
-            $.get("http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/booking/getallbookings",
+            $.get("http://localhost:8080/Term7-RESTService-1.0-SNAPSHOT/api/booking/getbookingbyagent/"+ loggedInAgent,
                 function (data) {
                     var table = $("#bookingTable");
                     table.empty(); // Clear the table before populating it
@@ -134,15 +131,24 @@
             // get all values in insert form field and prepare as JSON for insert
         function buildInsertJSON()
         {
-            var data = "{" +
-                "'bookingId': '0', " +
-                "'bookingDate': '" + document.getElementById("bookingDate").value + "', " +
-                "'bookingNo': '" + document.getElementById("bookingNo").value + "', " +
-                "'travelerCount': '" + document.getElementById("travelerCount").value + "', " +
-                "'customerId': '" + document.getElementById("customerId").value + "', " +
-                "'tripTypeId': '" + document.getElementById("tripTypeId").value + "', " +
-                "'packageId': '" + document.getElementById("packageId").value + "'" +
-                "}";
+            if(document.getElementById("bookingDate").value != null && document.getElementById("bookingNo").value != null &&
+                document.getElementById("travelerCount").value != null)
+            {
+                var data = "{" +
+                    "'bookingId': '0', " +
+                    "'bookingDate': '" + document.getElementById("bookingDate").value + "', " +
+                    "'bookingNo': '" + document.getElementById("bookingNo").value + "', " +
+                    "'travelerCount': '" + document.getElementById("travelerCount").value + "', " +
+                    "'customerId': '" + document.getElementById("customerId").value + "', " +
+                    "'tripTypeId': '" + document.getElementById("tripTypeId").value + "', " +
+                    "'packageId': '" + document.getElementById("packageId").value + "'" +
+                    "}";
+            }
+            else
+            {
+                alert("All fields are required");
+            }
+
             return data;
         }
 

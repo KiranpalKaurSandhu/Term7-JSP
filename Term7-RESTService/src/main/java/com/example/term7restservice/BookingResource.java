@@ -1,13 +1,13 @@
 package com.example.term7restservice;
 
 import com.google.gson.Gson;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import jakarta.persistence.*;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import model.Booking;
+import model.Customer;
 
 import java.util.List;
 
@@ -123,4 +123,38 @@ public class BookingResource {
             return "{\"message\": \"Booking delete failed: " + e.getMessage() + "\" }";
         }
     }
+
+        /*
+        Author: Jade Bayot
+         */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getbookingbyagent/{ agentId }")
+    public String getCustomer(@PathParam("agentId") int agentId) {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager = factory.createEntityManager();
+
+        String sql ="SELECT b from Booking b JOIN Customer c ON b.customerId = c.CustomerId where c.agentId= :agentId ORDER BY b.bookingId";
+        TypedQuery<Booking> query = entityManager.createQuery(sql,Booking.class);
+        query.setParameter("agentId", agentId);
+        JsonArray jsonArray = new JsonArray();
+        List<Booking> bookings = query.getResultList();
+
+        for(Booking b : bookings)
+        {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("bookingId", b.getBookingId());
+            jsonObject.addProperty("bookingNo", b.getBookingNo());
+            jsonObject.addProperty("bookingDate", b.getBookingDate().toString());
+            jsonObject.addProperty("travelerCount", b.getBookingId());
+            jsonObject.addProperty("customerId", b.getCustomerId());
+            jsonObject.addProperty("tripTypeId", b.getTripTypeId());
+            jsonObject.addProperty("packageId", b.getPackageId());
+            jsonArray.add(jsonObject);
+        }
+
+        return jsonArray.toString();
+    }
+
+
 }

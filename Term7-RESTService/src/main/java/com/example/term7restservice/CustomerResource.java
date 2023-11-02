@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import jakarta.persistence.*;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import model.Customer;
@@ -49,5 +50,35 @@ public class CustomerResource {
         Gson gson = new Gson();
 
         return gson.toJson(list);
+    }
+
+    /*
+        Author: Jade Bayot
+         */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getcustomerbyagent/{ agentId }")
+    public String getCustomer(@PathParam("agentId") int agentId) {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+        EntityManager entityManager = factory.createEntityManager();
+
+        String sql = "SELECT c from Customer c where c.agentId = :agentId";
+        TypedQuery<Customer> query = entityManager.createQuery(sql,Customer.class);
+        query.setParameter("agentId", agentId);
+
+        List<Customer> customers = query.getResultList();
+
+        JsonArray jsonArray = new JsonArray();
+        for(Customer c : customers)
+        {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("customerId", c.getCustomerId());
+            jsonObject.addProperty("custFirstName", c.getCustFirstName());
+            jsonObject.addProperty("custLastName", c.getCustLastName());
+            jsonObject.addProperty("agentId", c.getAgentId());
+            jsonArray.add(jsonObject);
+        }
+
+        return jsonArray.toString();
     }
 }

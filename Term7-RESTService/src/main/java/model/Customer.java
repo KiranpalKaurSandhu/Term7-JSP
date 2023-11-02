@@ -61,7 +61,7 @@ public class Customer {
     private String custEmail;
 
     @Column(name = "AgentId")
-    private Integer agent;
+    private Integer agentId;
 
     public Integer getCustomerId() {
         return CustomerId;
@@ -151,12 +151,12 @@ public class Customer {
         this.custEmail = custEmail;
     }
 
-    public Integer getAgent() {
-        return agent;
+    public Integer getAgentId() {
+        return agentId;
     }
 
-    public void setAgent(Integer agent) {
-        this.agent = agent;
+    public void setAgentId(Integer agentId) {
+        this.agentId = agentId;
     }
 
 }
