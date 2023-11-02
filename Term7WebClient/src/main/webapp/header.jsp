@@ -9,14 +9,14 @@
     <script src="jquery.js"></script>
     <%Object agent = session.getAttribute("agentId");%>
     <script>
+
+        // store logged-in agent for filtering
         var loggedInAgent = "<%=agent%>";
         // populate select fields onload
         $(document).ready(function ()
         {
+            //load booking related to logged-in agent
             loadBooking();
-
-
-            alert(loggedInAgent);
 
 
             // set items for customer ID select
@@ -53,7 +53,7 @@
                 });
             });
 
-            // onChange function to populate insert field with selected booking in delete
+            // onChange function to populate fields with selected booking in delete
             $("#deleteBookingId").change(function ()
             {
                 var bookingId = $("#deleteBookingId").val().toString();
@@ -69,7 +69,7 @@
                     });
             });
 
-
+            // onChange function to populate insert field with selected booking in update
             $("#updateBookingId").change(function ()
             {
                 var bookingId = $("#updateBookingId").val().toString();
